@@ -10,6 +10,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private Tile[] myTiles = new Tile[9];
 	private char currentTurn = 'x';
 	private ActionListener myListener;
+	private static boolean winner = false;
 	
 	
 	//constructor
@@ -50,7 +51,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	    checkThree(1, 4, 7);
 	    checkThree(2, 5, 8);
 	    
-	    // check diagonal
+	    // check diagonals
 	    checkThree(0, 4, 8);
 	    checkThree(2, 4, 6);
 	}
@@ -58,9 +59,14 @@ public class GamePanel extends JPanel implements ActionListener {
 	private void checkThree(int a, int b, int c) {
 	    if (myTiles[a].getSymbol() == myTiles[b].getSymbol() && 
 	        myTiles[b].getSymbol() == myTiles[c].getSymbol() && 
-	        myTiles[a].getSymbol() != ' ') {
-	        System.out.println("Winner: " + myTiles[a].getSymbol());
+	        myTiles[a].getSymbol() != ' ') {                                                          // are a, b and c all the same? an not just empty
+	        System.out.println("winner: " + myTiles[a].getSymbol());
+	        winner = true;
 	    }
+	}
+	
+	public char getTurn() {
+		return currentTurn;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -70,8 +76,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		source.setSymbol(currentTurn);
 		
 		checkWinner();
+		if (winner == true) {
+			System.out.println("show win panel");
+			Interface.showWinPanel();
+		}
 		
 		swapTurns();
 	}
 }
-
