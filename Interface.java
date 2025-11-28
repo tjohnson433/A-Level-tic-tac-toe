@@ -1,54 +1,55 @@
 package ticTacToe;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class Interface extends JPanel implements ActionListener{
 	
 	//attributes
-	private JLabel myTurnLabel = new JLabel("Turn: X");
-	private GamePanel myGamePanel = new GamePanel();
-	private CardLayout cardlayout = new CardLayout();
-	private JPanel cardPanel = new JPanel();		
-	private JPanel winPanel = new JPanel();
-	private JLabel winLabel = new JLabel();
-	private JButton resetButton = new JButton("Reset");
-	private JButton specialGameMode = new JButton("Special Mode");
-	private JButton normalGameMode = new JButton("Normal");
+	private static JLabel myTurnLabel = new JLabel("Turn: X");
+	private static GamePanel myGamePanel = new GamePanel();
 		
-	// set up panels
-	
-	win
-	
-	
-	
+	private static CardLayout cardlayout = new CardLayout();
+	private static JPanel panelswitcher = new JPanel(cardlayout);
+	private static JPanel winPanel = new JPanel();
+	private static JLabel winLabel = new JLabel();
 	
 	
+		
+		//constructor
+	public Interface() {
+		
+		winLabel.setText("win");
+		winPanel.setBackground(Color.red);
+		winPanel.setVisible(true);
+			
+		panelswitcher.add(myGamePanel, "Gamepanel");
+		panelswitcher.add(winPanel, winLabel);
+
+		this.setLayout(new BorderLayout());
+		this.add(panelswitcher, BorderLayout.CENTER);
+		this.add(myTurnLabel, BorderLayout.NORTH);
+		
+		//set up window
+		
+		
+		myGamePanel.setActionListener(this);
+	}
 	
-	//button methods
+	public static void showWinPanel() {
+		cardlayout.show(panelswitcher, "win");
+	}
 	
 	public void resetGame() {
 		
 	}
 	
-	//constructor
-	public Interface() {
-		this.setLayout(new BorderLayout());
-		this.add(myGamePanel, BorderLayout.CENTER);
-		this.add(myTurnLabel, BorderLayout.NORTH);
-		
-		myGamePanel.setActionListener(this);
-	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		myTurnLabel.setText("turn" + myGamePanel.getTurn());
 	}
 }
