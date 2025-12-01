@@ -1,5 +1,6 @@
 package ticTacToe;
 
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -11,6 +12,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	private char currentTurn = 'X';
 	private ActionListener myListener;
 	private static boolean winner = false;
+	private int whichWinner = 0;
+	
+	
 	
 	
 	//constructor
@@ -22,6 +26,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			myTiles[i].addActionListener(this);
 		}
 	}
+	
 	
 	public void setActionListener(ActionListener a) {
 		myListener = a;
@@ -35,7 +40,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		if (myListener != null) {
 			myListener.actionPerformed(new ActionEvent(this, 0, "Swap"));
-			System.out.println("swapped");
 		}
 	}
 	
@@ -59,20 +63,20 @@ public class GamePanel extends JPanel implements ActionListener {
 	private void checkThree(int a, int b, int c) {
 	    if (myTiles[a].getSymbol() == myTiles[b].getSymbol() && 
 	        myTiles[b].getSymbol() == myTiles[c].getSymbol() && 
-	        myTiles[a].getSymbol() != ' ') {                                                          // are a, b and c all the same? an not just empty
+	        myTiles[a].getSymbol() != ' ') {                    // are a, b and c all the same? and not just empty
+	    	
 	    	winner = true;
 	        System.out.println("winner: " + myTiles[a].getSymbol());
+	        
+	        
+	        if (winner == true) {
+	        	if (myTiles[a].getSymbol() == 'X') {                    //if winner is X set whichWinner to 1, set whichWinner to 2 if O wins, if whchWinner = 0 then its a draw
+	        		whichWinner = 1;
+	        	} else if (myTiles[a].getSymbol() == 'O') {
+	        		whichWinner = 2;
+	        	}
+	        }
 	    }
-	}
-	
-	public void resetGame() {
-		currentTurn = 'X';
-		winner = false;
-		
-		for (Tile t : myTiles) {
-			t.setSymbol(' ');
-			t.setEnabled(true);
-		}
 	}
 	
 	public char getTurn() {
@@ -80,16 +84,23 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	
 	
+	public int getWinner() {
+		return whichWinner;
+	}
+	
+	public void checkFullTiles() {
+		
+	}
+	
+	
 	
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("clicked");
 		
 		Tile source = (Tile)e.getSource();		
 		source.setSymbol(currentTurn);
 		
 		checkWinner();
 		if (winner == true) {
-			System.out.println("show win panel");
 			Interface.showWinPanel();
 		}
 		
