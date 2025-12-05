@@ -1,6 +1,3 @@
-package ticTacToe;
-
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -13,6 +10,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private ActionListener myListener;
 	private static boolean winner = false;
 	private int whichWinner = 0;
+	private static boolean isBoardFull;
 	
 	
 	
@@ -66,15 +64,15 @@ public class GamePanel extends JPanel implements ActionListener {
 	        myTiles[a].getSymbol() != ' ') {                    // are a, b and c all the same? and not just empty
 	    	
 	    	winner = true;
-	        System.out.println("winner: " + myTiles[a].getSymbol());
-	        
 	        
 	        if (winner == true) {
-	        	if (myTiles[a].getSymbol() == 'X') {                    //if winner is X set whichWinner to 1, set whichWinner to 2 if O wins, if whchWinner = 0 then its a draw
+	        	if (myTiles[a].getSymbol() == 'X') {                    //if winner is X set whichWinner to 1, set whichWinner to 2 if O wins, if whchWinner = 3 then its a draw
 	        		whichWinner = 1;
 	        	} else if (myTiles[a].getSymbol() == 'O') {
 	        		whichWinner = 2;
 	        	}
+	        } else if (winner == false) {
+	        	whichWinner = 3;
 	        }
 	    }
 	}
@@ -89,7 +87,18 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	
 	public void checkFullTiles() {
+		isBoardFull = true;
 		
+		for (Tile t: myTiles) {
+			
+			if (t.getSymbol() == ' ') {         // if any are empty then board isnot full
+				isBoardFull = false;
+			} 
+			
+		} 
+		if(isBoardFull = true) {
+			System.out.println("Board is full");
+		}
 	}
 	
 	
@@ -100,8 +109,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		source.setSymbol(currentTurn);
 		
 		checkWinner();
-		if (winner == true) {
-			Interface.showWinPanel();
+		checkFullTiles();
+		if (isBoardFull = true) {
+			if (winner == true) {
+				Interface.showWinPanel();
+			}
 		}
 		
 		swapTurns();
