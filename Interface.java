@@ -34,6 +34,8 @@ public class Interface extends JPanel implements ActionListener{
 		this.setLayout(new BorderLayout());
 		this.add(panelswitcher, BorderLayout.CENTER);
 		this.add(myTurnLabel, BorderLayout.NORTH);
+		
+		myTurnLabel.setHorizontalAlignment(JLabel.CENTER);
 	
 		myGamePanel.setActionListener(this);
 	}
@@ -41,15 +43,15 @@ public class Interface extends JPanel implements ActionListener{
 	
 	public void showWhoWon() {
 		
-		if (myGamePanel.getWinner() == 0) {
-			theWinner = "Draw";
-			winLabel.setText("Draw");
-		} else if (myGamePanel.getWinner() == 1) {
+		if (myGamePanel.getWinner() == 1) {
 			theWinner = "Crosses wins";
 			winLabel.setText("Crosses wins");
-		} else {
+		} else if (myGamePanel.getWinner() == 2) {
 			theWinner = "Noughts wins";
 			winLabel.setText("Noughts wins");
+		} else if (myGamePanel.getWinner() == 3){
+			theWinner = "Draw";
+			winLabel.setText("Draw");
 		}
 		
 	}
@@ -63,7 +65,6 @@ public class Interface extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
-		myTurnLabel.setHorizontalAlignment(JLabel.CENTER);
 		myTurnLabel.setText("Turn: " + myGamePanel.getTurn());
 		showWhoWon();
 	}
