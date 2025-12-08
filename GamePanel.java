@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -64,16 +65,20 @@ public class GamePanel extends JPanel implements ActionListener {
 	        myTiles[a].getSymbol() != ' ') {                    // are a, b and c all the same? and not just empty
 	    	
 	    	winner = true;
+	    
 	        
-	        if (winner == true) {
+	       if (winner == true) {
 	        	if (myTiles[a].getSymbol() == 'X') {                    //if winner is X set whichWinner to 1, set whichWinner to 2 if O wins, if whchWinner = 3 then its a draw
 	        		whichWinner = 1;
 	        	} else if (myTiles[a].getSymbol() == 'O') {
 	        		whichWinner = 2;
+	        	} else if (winner = false) {
+	        		whichWinner = 3;
+	        		System.out.println("Board full");
+	        		System.out.println("Draw");
+	        		System.out.println(whichWinner);
 	        	}
-	        } else if (winner == false) {
-	        	whichWinner = 3;
-	        }
+	       } 
 	    }
 	}
 	
@@ -86,20 +91,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		return whichWinner;
 	}
 	
-	public void checkFullTiles() {
-		isBoardFull = true;
-		
-		for (Tile t: myTiles) {
-			
-			if (t.getSymbol() == ' ') {         // if any are empty then board isnot full
-				isBoardFull = false;
-			} 
-			
-		} 
-		if(isBoardFull = true) {
-			System.out.println("Board is full");
-		}
-	}
 	
 	
 	
@@ -109,13 +100,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		source.setSymbol(currentTurn);
 		
 		checkWinner();
-		checkFullTiles();
-		if (isBoardFull = true) {
-			if (winner == true) {
-				Interface.showWinPanel();
-			}
-		}
-		
+		if (winner == true) {
+			Interface.showWinPanel();
+		} 
 		swapTurns();
+		
+		
 	}
 }
