@@ -78,7 +78,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	        		System.out.println("Draw");
 	        		System.out.println(whichWinner);
 	        	}
-	       } 
+	       	} 
 	    }
 	}
 	
@@ -91,7 +91,17 @@ public class GamePanel extends JPanel implements ActionListener {
 		return whichWinner;
 	}
 	
-	
+	public void resetBoard() {
+		for (int i = 0; i < 9; i++) { 
+			myTiles[i].setSymbol(' ');
+			myTiles[i].setEnabled(true);
+		}
+		
+		currentTurn = 'X';
+		
+		winner = false;
+		
+	}
 	
 	
 	public void actionPerformed(ActionEvent e) {
