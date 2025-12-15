@@ -1,5 +1,4 @@
 package ticTacToe;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -9,7 +8,8 @@ public class Interface extends JPanel implements ActionListener{
 	//attributes
 	
 	private static JLabel myTurnLabel = new JLabel("Turn: X");
-	private static GamePanel myGamePanel = new GamePanel();                              // screen1
+	private static GamePanel myGamePanel = new GamePanel();   					// screen1
+	private static connectFourGamePanel myConnect4GamePanel = new connectFourGamePanel();
 		
 	private static CardLayout cardlayout = new CardLayout();                  // creates the cardLayout
 	private static JPanel panelswitcher = new JPanel(cardlayout);             // tells the JPanel how to arrange the contents
@@ -19,7 +19,10 @@ public class Interface extends JPanel implements ActionListener{
 	private static JPanel menuPanel = new JPanel();
 	private static JButton menuButton = new JButton("Main Menu");
 	private static JButton ticTacToeButton = new JButton();
+	private static JPanel ticTacToeOptionsPanel = new JPanel();
 	private static JButton connectFourButton = new JButton();
+	private static JPanel connect4Panel = new JPanel();
+	private static JLabel connect4Label = new JLabel("not done");
 	private static JButton resetButton  = new JButton("Reset Game");
 	private static String theWinner = " ";
 	
@@ -42,6 +45,7 @@ public class Interface extends JPanel implements ActionListener{
 		panelswitcher.add(myGamePanel, "Gamepanel");
 		panelswitcher.add(winPanel, "Win Panel");
 		panelswitcher.add(menuPanel, "Menu Panel");
+		panelswitcher.add(myConnect4GamePanel, "Connect 4 Panel");
 
 		this.setLayout(new BorderLayout());
 		this.add(panelswitcher, BorderLayout.CENTER);
@@ -50,7 +54,6 @@ public class Interface extends JPanel implements ActionListener{
 		myTurnLabel.setHorizontalAlignment(JLabel.CENTER);	
 		myTurnLabel.setBackground(Color.WHITE);
 		
-		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridLayout(1, 2));
 		buttonsPanel.add(resetButton);
 		buttonsPanel.add(menuButton);
@@ -72,6 +75,12 @@ public class Interface extends JPanel implements ActionListener{
 		connectFourButton.setFont(new Font("Jumble", Font.BOLD, 20));
 		connectFourButton.setBackground(Color.WHITE);
 		connectFourButton.setFocusable(false);
+		
+		connect4Panel.setLayout(new BorderLayout());
+		connect4Panel.add(connect4Label, BorderLayout.CENTER);
+		connect4Label.setText("Not done");
+		connect4Label.setFont(new Font("Jumble", Font.BOLD, 20));
+		connect4Panel.setBackground(Color.WHITE);
 		
 		menuButton.addActionListener(this);
 		menuButton.setText("Main Menu");
@@ -114,11 +123,23 @@ public class Interface extends JPanel implements ActionListener{
 		cardlayout.show(panelswitcher, "Menu Panel");
 	}
 	
+	public static void showTicTacToe() {
+		myGamePanel.resetBoard();
+		myTurnLabel.setText("Turn: " + myGamePanel.getTurn());
+		cardlayout.show(panelswitcher, "Gamepanel");
+	}
+	
+	
+	public static void showConnect4() {
+		cardlayout.show(panelswitcher, "Connect 4 Panel");
+	}
+	
 	public void resetBoard() {
 		myGamePanel.resetBoard();
 		myTurnLabel.setText("Turn: " + myGamePanel.getTurn());
 		cardlayout.show(panelswitcher, "Gamepanel");
 	}
+	
 	
 	
 	@Override
@@ -130,11 +151,21 @@ public class Interface extends JPanel implements ActionListener{
 		if (e.getSource() == resetButton) { 
 			resetBoard();
 		}
+		
 		if (e.getSource() == menuButton) {
 			showMenuPanel();
 		}
+		
+		if (e.getSource() == ticTacToeButton) {
+			showTicTacToe();
+		}
+		
+		if (e.getSource() == connectFourButton) {
+			showConnect4();
+		}
 	}
 }
+
 
 
 
