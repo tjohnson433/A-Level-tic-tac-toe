@@ -103,6 +103,14 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 	}
 	
+	public void randomAIMove() {
+		for (int i = 0; i < 9; i++) {
+			if (i != 'X' && i!= 'O' ) {
+				myTiles[i].setSymbol(currentTurn);
+			}
+		}
+	}
+	
 	
 	public void actionPerformed(ActionEvent e) {
 		
@@ -118,3 +126,4 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 	}
 }
+
