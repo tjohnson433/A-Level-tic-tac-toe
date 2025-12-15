@@ -1,0 +1,23 @@
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
+
+public class connectFourGamePanel extends JPanel implements ActionListener{
+	
+	private Tile[] connect4Tiles = new Tile[42];
+	
+	public connectFourGamePanel() {
+		this.setLayout(new GridLayout(6,7));
+		for (int i = 0; i < 42; i++) {
+			connect4Tiles[i] = new Tile();
+			this.add(connect4Tiles[i]);
+			connect4Tiles[i].addActionListener(this);
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+}
