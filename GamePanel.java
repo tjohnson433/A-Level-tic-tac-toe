@@ -11,7 +11,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private ActionListener myListener;
 	private static boolean winner = false;
 	private int whichWinner = 0;
-	private static boolean isBoardFull;
+	private boolean AIMode = false;
 	
 	
 	
@@ -126,4 +126,3 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 	}
 }
-
