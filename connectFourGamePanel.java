@@ -17,7 +17,7 @@ public class connectFourGamePanel extends JPanel implements ActionListener{
 			connect4Tiles[i] = new Tile();
 			this.add(connect4Tiles[i]);
 			connect4Tiles[i].addActionListener(this);
-		}
+		} 
 		updateAvailableTiles();
 	}
 	

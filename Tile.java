@@ -5,7 +5,7 @@ public class Tile extends JButton{
 	
 	//attributes
 	private char mySymbol = ' ';
-	private boolean  clicked = false;
+	private boolean clicked = false;
 	
 	//methods
 	public void setSymbol(char s) {
