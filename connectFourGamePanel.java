@@ -1,0 +1,55 @@
+
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
+
+public class connectFourGamePanel extends JPanel implements ActionListener{
+	
+	private Tile[] connect4Tiles = new Tile[42];
+	private char currentTurn = 'X'; 
+	private ActionListener myListener;
+	
+	public connectFourGamePanel() {
+		this.setLayout(new GridLayout(6,7));
+		for (int i = 0; i < 42; i++) {
+			connect4Tiles[i] = new Tile();
+			this.add(connect4Tiles[i]);
+			connect4Tiles[i].addActionListener(this);
+		}
+	}
+	
+	public void setActionListener(ActionListener a) {
+		myListener = a;
+	}
+	
+	public void swapTurns() {
+		if (currentTurn == 'O') {
+			currentTurn = 'X';
+		} else {
+			currentTurn = 'O';
+		}
+		if (myListener != null) {
+			myListener.actionPerformed(new ActionEvent(this, 0, "Swap"));
+		}
+	}
+	
+	
+	public void checkWinner() {
+		
+	}
+	
+	public void checkFour() {
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		Tile source = (Tile)e.getSource();		
+		source.setSymbol(currentTurn);
+		swapTurns();
+		
+	}
+}
+
