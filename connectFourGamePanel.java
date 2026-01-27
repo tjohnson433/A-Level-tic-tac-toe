@@ -9,7 +9,7 @@ public class connectFourGamePanel extends JPanel implements ActionListener{
 	private char currentTurn = 'X'; 
 	private ActionListener myListener;
 	private static boolean winner = false;
-	private int whichWinner = 0;
+	private int whichWinner = 0; //testing repository
 	
 	public connectFourGamePanel() {
 		this.setLayout(new GridLayout(6,7));
