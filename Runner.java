@@ -7,8 +7,9 @@ public class Runner {
 		JFrame window = new JFrame();
 		window.setSize(600, 600);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setContentPane(new GamePanel());
+		window.setContentPane(new Interface());
+		
+		Interface.showMenuPanel();
 		window.setVisible(true);
 	}
-
 }
