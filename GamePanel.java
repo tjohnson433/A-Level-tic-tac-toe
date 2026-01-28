@@ -90,6 +90,18 @@ public class GamePanel extends JPanel implements ActionListener {
 	public int getWinner() {
 		return whichWinner;
 	}
+	public boolean checkDrawTicTacToe() {
+		if (winner == false) {
+			return false;
+		} else {
+			for (int i = 0; i < 9; i++) {
+				if(myTiles[i].getSymbol() == ' ') {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
 	
 	public void resetBoard() {
 		for (int i = 0; i < 9; i++) { 

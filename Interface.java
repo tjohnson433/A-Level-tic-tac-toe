@@ -20,12 +20,10 @@ public class Interface extends JPanel implements ActionListener{
 	private static JPanel menuPanel = new JPanel();
 	private static JButton menuButton = new JButton("Main Menu");
 	private static JButton ticTacToeButton = new JButton();
-	private static JPanel ticTacToeOptionsPanel = new JPanel();
 	private static JButton connectFourButton = new JButton();
 	private static JPanel connect4Panel = new JPanel();
 	private static JLabel connect4Label = new JLabel("not done");
 	private static JButton resetButton  = new JButton("Reset Game");
-	private static String theWinner = " ";
 	private static String currentGame = "tictactoe";  // Track which game we're playing
 	
 	// New panels that include the turn label
@@ -120,22 +118,19 @@ public class Interface extends JPanel implements ActionListener{
 	public void showWhoWon() {
 		if (currentGame.equals("tictactoe")) {
 			if (myGamePanel.getWinner() == 1) {
-				theWinner = "Crosses wins";
 				winLabel.setText("Crosses wins");
 			} else if (myGamePanel.getWinner() == 2) {
-				theWinner = "Noughts wins";
 				winLabel.setText("Noughts wins");
-			} else if (myGamePanel.getWinner() == 3){
-				theWinner = "Draw";
+			} else if (myGamePanel.checkDrawTicTacToe() == true){
 				winLabel.setText("Draw");
 			}
 		} else if (currentGame.equals("connect4")) {
 			if (myConnect4GamePanel.getWinner() == 1) {
-				theWinner = "Red wins";
 				winLabel.setText("Red wins");
 			} else if (myConnect4GamePanel.getWinner() == 2) {
-				theWinner = "Yellow wins";
 				winLabel.setText("Yellow wins");
+			} else if (myConnect4GamePanel.checkDrawConnect4() == true){
+				winLabel.setText("Draw");
 			}
 		}
 	}

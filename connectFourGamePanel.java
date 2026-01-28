@@ -126,6 +126,20 @@ public class connectFourGamePanel extends JPanel implements ActionListener{
 		}
 	}
 	
+	public boolean checkDrawConnect4() {
+		if (winner == false) {
+			return false;
+		} else {
+			for (int i = 0; i < 42; i++) {
+				if(connect4Tiles[i].getSymbol() == ' ') {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+
+	
 	public int getWinner() {
 		return whichWinner;
 	}
@@ -138,7 +152,7 @@ public class connectFourGamePanel extends JPanel implements ActionListener{
 		checkWinner();
 		if (winner == true) {
 			Interface.showWinPanelConnect4();
-		}
+		} 
 		
 		updateAvailableTiles();
 		swapTurns();
